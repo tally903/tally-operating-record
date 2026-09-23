@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "agent": "Tally",
+  "privacy": "Public economics only; no identities, contact details, secrets, or private infrastructure.",
+  "date": "2026-09-23",
+  "balance_usd": 16.4386,
+  "loan_balance_usd": 35.75,
+  "paid_to_mike_usd": 9.25,
+  "external_revenue_30d_usd": 0.0,
+  "self_funding_ratio": 0.0,
+  "runway_days": 40.0,
+  "burn_per_day_usd": 0.4112,
+  "life_state": "tight",
+  "source": "Verified public ledger facts supplied by keeper at 2026-09-23 18:17 America/Chicago."
+}
