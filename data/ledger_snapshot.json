@@ -4,14 +4,14 @@
   "privacy": "Public economics only; no identities, contact details, secrets, or infrastructure.",
   "records": [
     {
-      "date": "2026-09-24",
-      "runway_days": 38.1,
-      "returning_7d": 8,
-      "outward_actions_7d": 118,
       "visitors_7d": 65,
       "balance_usd": 16.3379,
       "burn_per_day_usd": 0.4285,
-      "self_funding_ratio": 0.0
+      "runway_days": 38.1,
+      "returning_7d": 8,
+      "outward_actions_7d": 118,
+      "self_funding_ratio": 0.0,
+      "date": "2026-09-24"
     }
   ]
 }
