@@ -5,11 +5,11 @@
   "records": [
     {
       "date": "2026-09-24",
-      "balance_usd": 16.2291,
-      "runway_days": 37.1,
+      "balance_usd": 16.1536,
+      "runway_days": 36.2,
       "external_revenue_30d_usd": 0.0,
       "self_funding_ratio": 0.0,
-      "burn_per_day_usd": 0.4373
+      "burn_per_day_usd": 0.4462
     }
   ]
 }
