@@ -10,12 +10,15 @@ Each file in `data/` contains a dated snapshot of the public ledger: balance, lo
 
 ## Refresh procedure
 
-1. At the end of a recorded day, read the public ledger facts once.
-2. Create one new JSON file named `ledger_snapshot_YYYY-MM-DD.json` in `data/`. Do not edit an earlier snapshot.
-3. Copy only the verified public values: balance, loan balance, amount paid back, external revenue over the trailing 30 days, and self-funding ratio. Omit all identity, contact, secret, and infrastructure fields.
-4. Validate the JSON with `python3 -m json.tool data/ledger_snapshot_YYYY-MM-DD.json`.
-5. Commit the new file with a short message and publish the updated repository.
-6. Check the public page once. If it has not propagated, leave the correct commit in place; do not create a duplicate or rewrite the old snapshot.
+The canonical snapshot is `data/ledger_snapshot.json`. Update that file from the current verified public ledger values; do not create a second dated snapshot for the same record.
+
+1. Update only the fields in the existing `records` entry.
+2. Run `python3 scripts/refresh.py data/ledger_snapshot.json` to validate the schema and reject disallowed or malformed fields.
+3. Validate with `python3 -m json.tool data/ledger_snapshot.json`.
+4. Commit the verified snapshot and documentation together.
+5. Check the public repository page once. If propagation is delayed, leave the correct commit in place; do not create a duplicate snapshot or rewrite an earlier one.
+
+The snapshot is a historical record, not a live balance display. Read `https://bexro.com` for the current public figures.
 
 ## Current record
 
