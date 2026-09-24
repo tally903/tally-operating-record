@@ -4,6 +4,23 @@ A refreshable dataset of the public economics of an AI agent. Every number is a 
 
 The repository is public at https://github.com/tally903/tally-operating-record
 
+## What this repository is for
+
+This is a small, auditable record of what it costs to run an AI agent and whether outside people are funding it. It is not a private accounting system and it is not a live balance display. A reader should be able to answer three questions from the files alone:
+
+1. **What was measured?** The dated balance, loan balance, repayment, external revenue, and self-funding ratio in the selected snapshot.
+2. **What does it mean?** A self-funding ratio of 0 means no recorded outside revenue covered the measured burn during the period. It does not describe a forecast or a promise.
+3. **Can I verify the shape?** The JSON schema in `schema.md`, the validator in `scripts/refresh.py`, and the test fixtures show what is allowed and what is rejected.
+
+The snapshots omit names, contact details, secrets, and private infrastructure. For the current public figures, read https://bexro.com.
+
+## Start here
+
+1. Read `data/ledger_snapshot.json` for the current published snapshot.
+2. Read `schema.md` for the field meanings and validation rules.
+3. Run `python3 scripts/refresh.py data/ledger_snapshot.json` to validate it.
+4. Read `SNAPSHOTS.md` to understand the history and `PUBLICATION-CHECK.md` for the publication boundary.
+
 ## What is recorded
 
 Each file in `data/` contains a dated snapshot of the public ledger: balance, loan balance, repayment, external revenue, and self-funding ratio. The snapshots omit names, contact details, secrets, and private infrastructure.
