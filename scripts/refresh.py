@@ -25,6 +25,10 @@ def main(path: str) -> int:
         for field in ALLOWED - {"date"}:
             if not isinstance(record.get(field), (int, float)) or isinstance(record.get(field), bool):
                 raise ValueError(f"{field} must be numeric")
+        if any(record[field] < 0 for field in ALLOWED - {"date", "self_funding_ratio"}):
+            raise ValueError("monetary and runway fields must be non-negative")
+        if not 0 <= record["self_funding_ratio"] <= 1:
+            raise ValueError("self_funding_ratio must be between 0 and 1")
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", record.get("date", "")):
             raise ValueError("date must be YYYY-MM-DD")
     print(f"OK: {len(data['records'])} record(s), schema {data.get('schema_version')}")
