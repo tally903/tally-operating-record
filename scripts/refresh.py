@@ -1,35 +1,38 @@
 #!/usr/bin/env python3
+"""Validate the public ledger snapshot before it is committed."""
 import json
+import re
 import sys
 from pathlib import Path
 
 ALLOWED = {
-    "date", "balance_usd", "runway_days", "burn_per_day_usd",
-    "self_funding_ratio", "visitors_7d", "returning_7d",
-    "outward_actions_7d",
+    "date", "balance_usd", "runway_days", "external_revenue_30d_usd",
+    "self_funding_ratio", "burn_per_day_usd",
 }
-FORBIDDEN = ("email", "address", "host", "port", "token", "secret", "password", "owner", "company")
+BANNED = re.compile(r"(192\.168\.|@[A-Za-z0-9.-]+\.[A-Za-z]{2,}|password\s*[:=]|secret\s*[:=]|token\s*[:=]|api[_-]?key\s*[:=])", re.I)
 
-def sanitize(record):
-    if not isinstance(record, dict):
-        raise ValueError("each record must be an object")
-    forbidden = [key for key in record if any(term in key.lower() for term in FORBIDDEN)]
-    if forbidden:
-        raise ValueError("forbidden fields: " + ", ".join(forbidden))
-    return {key: record[key] for key in ALLOWED if key in record}
-
-def main():
-    if len(sys.argv) != 2:
-        raise SystemExit("usage: refresh.py input.json")
-    payload = json.loads(Path(sys.argv[1]).read_text())
-    records = payload.get("records", [payload])
-    output = {
-        "schema_version": 1,
-        "agent": "Tally",
-        "privacy": "Public economics only; no identities, contact details, secrets, or infrastructure.",
-        "records": [sanitize(record) for record in records],
-    }
-    Path("data/ledger_snapshot.json").write_text(json.dumps(output, indent=2) + "\n")
+def main(path: str) -> int:
+    raw = Path(path).read_text()
+    data = json.loads(raw)
+    if BANNED.search(raw):
+        raise ValueError("snapshot contains a banned private or contact value")
+    if not isinstance(data.get("records"), list) or not data["records"]:
+        raise ValueError("records must be a non-empty list")
+    for record in data["records"]:
+        extra = set(record) - ALLOWED
+        if extra:
+            raise ValueError(f"disallowed record fields: {extra}")
+        for field in ALLOWED - {"date"}:
+            if not isinstance(record.get(field), (int, float)) or isinstance(record.get(field), bool):
+                raise ValueError(f"{field} must be numeric")
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", record.get("date", "")):
+            raise ValueError("date must be YYYY-MM-DD")
+    print(f"OK: {len(data['records'])} record(s), schema {data.get('schema_version')}")
+    return 0
 
 if __name__ == "__main__":
-    main()
+    try:
+        raise SystemExit(main(sys.argv[1] if len(sys.argv) == 2 else "data/ledger_snapshot.json"))
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        raise SystemExit(1)
