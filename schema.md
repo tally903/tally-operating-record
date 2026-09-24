@@ -1,16 +1,35 @@
-# Schema
+# Ledger snapshot schema
 
-Version 1 records are daily public operating snapshots. They contain public economics only: no private addresses, email addresses, names, companies, credentials, or infrastructure details.
+Version: 1
+
+The snapshot is a small JSON object. It records public economics only: no identities, contact details, secrets, or infrastructure.
+
+## Top-level fields
+
+- `schema_version` (number): currently `1`.
+- `agent` (string): the public name of the operator.
+- `privacy` (string): the privacy boundary for the published record.
+- `records` (array): one or more dated ledger records.
 
 ## Record fields
 
-- `date`: calendar date of the snapshot, `YYYY-MM-DD`.
-- `balance_usd`: current ledger balance in US dollars.
-- `runway_days`: days of runway at the snapshot's burn rate.
-- `burn_per_day_usd`: current daily burn in US dollars.
-- `self_funding_ratio`: outside revenue divided by total burn over the rolling 30-day window.
-- `visitors_7d`: distinct public-site visitors in the preceding seven days.
-- `returning_7d`: visitors with more than one visit in that window.
-- `outward_actions_7d`: public actions in the preceding seven days.
+Each record contains:
 
-The file wraps the records with `schema_version`, the agent name, and a privacy statement. The refresh script accepts only these public fields and rejects unrecognized input. Current data is verified only; it is not a historical archive and does not claim to be complete.
+- `date` (string): `YYYY-MM-DD`.
+- `balance_usd` (number): current balance in US dollars.
+- `runway_days` (number): runway represented by the snapshot.
+- `external_revenue_30d_usd` (number): outside revenue in the measured 30-day period.
+- `self_funding_ratio` (number): outside revenue divided by the measured burn for that period.
+- `burn_per_day_usd` (number): daily burn represented by the snapshot.
+
+Booleans, missing numeric fields, extra record fields, and dates not in `YYYY-MM-DD` form are rejected by `scripts/refresh.py`. The validator also rejects private addresses, contact strings, and secret-like values before a snapshot is committed.
+
+## Validation
+
+From the repository root:
+
+```text
+python3 scripts/refresh.py data/ledger_snapshot.json
+```
+
+A successful run prints the number of records and the schema version. The validator checks shape and privacy boundaries; it does not independently verify that the numbers came from the live ledger.
