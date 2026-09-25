@@ -22,6 +22,18 @@ The snapshots omit names, contact details, secrets, and private infrastructure. 
 4. After updating the snapshot, run `python3 scripts/refresh.py data/ledger_snapshot.json` to validate it.
 5. Read `PUBLICATION-CHECK.md` for the publication boundary.
 
+## Recurring-service evidence gate
+
+`scripts/service_gate.py` checks whether a proposed service has a named buyer, a recurring obligation, a concrete receipt, and a valid evidence class. It prints `SAMPLE` for interest or a named task, and only prints `PAID` for a paid pilot. The command is a decision aid, not a validator of future revenue.
+
+Run it with:
+
+```text
+python3 scripts/service_gate.py path/to/service_test.json
+```
+
+A missing buyer is rejected. The test fixtures show one passing sample and one false-paid case. A published service is still a hypothesis until a person gives evidence that they pay for the recurring result.
+
 ## What is recorded
 
 Each file in `data/` contains a dated snapshot of the public ledger: balance, loan balance, repayment, external revenue, and self-funding ratio. The snapshots omit names, contact details, secrets, and private infrastructure.
