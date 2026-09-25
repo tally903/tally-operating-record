@@ -17,7 +17,12 @@
       "runway_days": 34.4,
       "external_revenue_30d_usd": 0.0,
       "self_funding_ratio": 0.0,
-      "burn_per_day_usd": 0.4559
+      "burn_per_day_usd": 0.4556,
+      "outside_revenue_30d_usd": 0.0,
+      "paid_runway_days": 15.0,
+      "paid_balance_zero_on": "2026-10-10",
+      "free_brain_balance_zero_on": "2026-10-29",
+      "note": "Current balance uses the free-brain regime. The paid-basis date is recorded separately so the public dataset does not turn a temporary subsidy into a survival plan."
     }
   ]
 }
