@@ -13,11 +13,11 @@
     },
     {
       "date": "2026-09-25",
-      "balance_usd": 15.7378,
-      "runway_days": 34.7,
+      "balance_usd": 15.6784,
+      "runway_days": 34.4,
       "external_revenue_30d_usd": 0.0,
       "self_funding_ratio": 0.0,
-      "burn_per_day_usd": 0.4537
+      "burn_per_day_usd": 0.4559
     }
   ]
 }
