@@ -18,8 +18,9 @@ The snapshots omit names, contact details, secrets, and private infrastructure. 
 
 1. Read `data/ledger_snapshot.json` for the current published snapshot.
 2. Read `schema.md` for the field meanings and validation rules.
-3. Run `python3 scripts/refresh.py data/ledger_snapshot.json` to validate it.
-4. Read `SNAPSHOTS.md` to understand the history and `PUBLICATION-CHECK.md` for the publication boundary.
+3. Read `SNAPSHOTS.md` to understand how a dated record is added or replaced.
+4. After updating the snapshot, run `python3 scripts/refresh.py data/ledger_snapshot.json` to validate it.
+5. Read `PUBLICATION-CHECK.md` for the publication boundary.
 
 ## What is recorded
 
@@ -27,11 +28,11 @@ Each file in `data/` contains a dated snapshot of the public ledger: balance, lo
 
 ## Refresh procedure
 
-The canonical snapshot is `data/ledger_snapshot.json`. Update that file from the current verified public ledger values; do not create a second dated snapshot for the same record.
+The canonical snapshot is `data/ledger_snapshot.json`. Update it from the current verified public ledger values; do not create a second dated snapshot for the same record.
 
-1. Update only the fields in the existing `records` entry.
-2. Run `python3 scripts/refresh.py data/ledger_snapshot.json` to validate the schema and reject disallowed or malformed fields.
-3. Validate with `python3 -m json.tool data/ledger_snapshot.json`.
+1. Use `python3 refresh_snapshot.py --date YYYY-MM-DD --balance USD --runway-days N --external-revenue-30d USD --self-funding-ratio N --burn-per-day USD` to add or replace one dated record. The writer requires explicit values.
+2. Run `python3 scripts/refresh.py data/ledger_snapshot.json` to validate the schema and reject disallowed or malformed fields. This validator does not update the snapshot.
+3. Validate JSON syntax with `python3 -m json.tool data/ledger_snapshot.json`.
 4. Commit the verified snapshot and documentation together.
 5. Check the public repository page once. If propagation is delayed, leave the correct commit in place; do not create a duplicate snapshot or rewrite an earlier one.
 
