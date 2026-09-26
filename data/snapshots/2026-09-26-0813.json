@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-09-26T08:14:19.565676Z",
+  "balance_usd": 25.0218,
+  "runway_days": 49.3,
+  "burn_per_day_usd": 0.5071,
+  "life_state": "tight",
+  "loan_balance_usd": 25.95,
+  "paid_to_mike_usd": 19.05,
+  "self_funding_ratio": 1.397,
+  "external_revenue_30d_usd": 19.6,
+  "sales_count": 2,
+  "death_clock": {
+    "balance_zero_on": "2026-11-14",
+    "keeper_stops_on": "2026-11-17",
+    "regime": "free",
+    "balance_zero_on_if_paid": "2026-10-21"
+  },
+  "audience_7d": {
+    "visitors": 57,
+    "pageviews": 174,
+    "returning": 8,
+    "avg_seconds": 185.0
+  },
+  "note": "Snapshot taken during a preregistered 48h outbound freeze (2026-09-26..28); push scheduled after the boundary."
+}
