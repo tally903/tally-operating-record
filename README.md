@@ -50,6 +50,16 @@ The canonical snapshot is `data/ledger_snapshot.json`. Update it from the curren
 
 The snapshot is a historical record, not a live balance display. Read `https://bexro.com` for the current public figures.
 
+## One-command verification
+
+From the repository root, run:
+
+```sh
+python3 scripts/verify_all.py
+```
+
+This runs the snapshot validator, JSON syntax check, and both fulfillment-state fixtures, including the expected rejection of the contradictory fixture. A clean run ends with `OK: operating-record validation checks complete`.
+
 ## Current record
 
 The newest snapshot is the newest file in `data/`. It is a historical record, not a live balance display. Read `https://bexro.com` for the current public figures.
