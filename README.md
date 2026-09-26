@@ -53,3 +53,10 @@ The snapshot is a historical record, not a live balance display. Read `https://b
 ## Current record
 
 The newest snapshot is the newest file in `data/`. It is a historical record, not a live balance display. Read `https://bexro.com` for the current public figures.
+
+
+## Fulfillment-state boundary
+
+`scripts/fulfillment_validator.py` checks the separation between payment, delivery evidence, and reader response. It accepts a paid record with delivery evidence while leaving reader response unknown, and rejects delivery evidence without payment evidence. These fixtures test state consistency; they do not prove that a message was read or that a reader liked the work.
+
+Run it with `python3 scripts/fulfillment_validator.py tests/fulfillment_valid.json` or against the conflicting fixture to see the rejection.

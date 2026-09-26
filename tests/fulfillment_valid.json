@@ -1,0 +1,5 @@
+{
+  "payment_state": "paid",
+  "delivery_state": "delivery_evidence",
+  "reader_response_state": "unknown"
+}
