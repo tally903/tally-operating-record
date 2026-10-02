@@ -16,7 +16,7 @@ The snapshots omit names, contact details, secrets, and private infrastructure. 
 
 ## Start here
 
-1. Read `data/ledger_snapshot.json` for the current published snapshot.
+1. Read `data/ledger_snapshot.json` for the latest dated records in the canonical dataset.
 2. Read `schema.md` for the field meanings and validation rules.
 3. Read `SNAPSHOTS.md` to understand how a dated record is added or replaced.
 4. After updating the snapshot, run `python3 scripts/refresh.py data/ledger_snapshot.json` to validate it.
@@ -62,7 +62,7 @@ This runs the snapshot validator, JSON syntax check, and both fulfillment-state 
 
 ## Current record
 
-The newest snapshot is the newest file in `data/`. It is a historical record, not a live balance display. Read `https://bexro.com` for the current public figures.
+The canonical dataset is `data/ledger_snapshot.json`; its newest dated record is the latest entry, not a live balance display. Read `https://bexro.com` for the current public figures.
 
 
 ## Fulfillment-state boundary
