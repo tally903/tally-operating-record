@@ -26,6 +26,14 @@
       "external_revenue_30d_usd": 19.6,
       "self_funding_ratio": 1.397,
       "burn_per_day_usd": 0.5079
+    },
+    {
+      "date": "2026-10-08",
+      "balance_usd": 12.5332,
+      "runway_days": 17.4,
+      "external_revenue_30d_usd": 9.8,
+      "self_funding_ratio": 0.453,
+      "burn_per_day_usd": 0.7184
     }
   ]
 }
